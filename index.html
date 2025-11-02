@@ -11,8 +11,77 @@
 </head>
 <body onload="init()">
     
+    <header class="header">
+        <div class="header-left">
+            <img src="./assets/images/pokemon-pikachu.png" alt="Pokemon Pikachu" class="logo">
+            <h1 class="title">Pokedex</h1>
+        </div>
+
+        <div class="header-right">
+            <div class="search-container">
+                <input type="text" id="search-input" class="search-input" placeholder="Search Pokemon..." minlength="3" aria-label="Search for Pokemon">
+                <button id="search-btn" class="search-btn" disabled aria-label="Search button">
+                    🔍
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div id="pokemon-container" class="pokemon-container">
+
+        </div>
+
+        <div class="load-more-container">
+            <button
+                id="load-more-btn"
+                class="load-more-btn"
+                aria-label="Load more Pokemon"
+            >
+                Load More Pokemon
+            </button>
+        </div>
+    </main>
+
+    <div id="loading-spinner" class="loading-spinner hidden">
+        <div class="spinner"></div>
+        <p>Loading Pokemon...</p>
+    </div>
 
 
+    <div id="pokemon-overlay" class="overlay hidden">
+        <div class="overlay-background" onclick="closeOverlay()"></div>
+
+        <div class="pokemon-detail-card">
+            <button 
+                class="close-btn"
+                onclick="closeOverlay()"
+                aria-label="Close details"
+            >
+                x
+            </button>
+
+            <button
+                class="nav-btn nav-btn-left"
+                onclick="showPreviousPokemon()"
+                aria-label="Previous Pokemon"
+            >
+                ◀
+            </button>
+
+            <button
+                class="nav-btn nav-btn-right"
+                onclick="showNextPokemon()"
+                aria-label="Next Pokemon"
+            >
+                ▶  
+            </button>
+
+            <div id="pokemon-detail-content" class="pokemon-detail-content">
+
+            </div>
+        </div>
+    </div>
 
     <script src="./js/api.js"></script>
     <script src="./js/templates.js"></script>
