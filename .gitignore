@@ -137,3 +137,32 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Betriebssystem
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporäre Dateien
+*.tmp
+*.temp
+~*
+
+# Node (falls npm genutzt wird)
+node_modules/
+package-lock.json
+
+# Persönliche Notizen
+notes.txt
+TODO.txt
+```
