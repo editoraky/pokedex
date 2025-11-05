@@ -1,43 +1,44 @@
-async function loadInitialPokemon() {
-	try {
-		console.log("Starte Pokemon-Laden...");
+let offset = 0;
 
+async function loadPokemon() {
+	const spinner = document.getElementById("loading-spinner");
+	spinner.classList.remove("hidden");
+
+	const loadMoreBtn = document.getElementById("load-more-btn");
+	loadMoreBtn.disabled = true;
+	loadMoreBtn.textContent = "Loading...";
+
+	try {
 			const response = await fetch(
-				"https://pokeapi.co/api/v2/pokemon?limit=20&offset=0"
-			);
+				`https://pokeapi.co/api/v2/pokemon?limit=20&offset=${offset}`);
 			const data = await response.json();
-		
-		console.log("Liste geladen:", data);
-		console.log("Anzahl Pokemon:", data.results.length);
+		  
 
 			for (let i = 0; i < data.results.length; i++) {
 				const pokemon = data.results[i];
-
-				console.log(`Lade Details für:  ${pokemon.name}...`);
-
+				
 				const detailResponse = await fetch(pokemon.url);
 				const details = await detailResponse.json();
 
-				console.log(`${details.name} geladen`, details);
+				allPokemon.push(details);
 
-				// renderPokemonCard(details);
+				const name = details.name;
+				const image = details.sprites.other["official-artwork"].front_default;
+				const types = details.types;
+
+				const currentIndex = allPokemon.length - 1;
+				const html = getPokemonCardTemplate(name, image, types, currentIndex);
+				
+				const container = document.getElementById("pokemon-container");
+				container.innerHTML += html;
 		}
-			console.log("Alle Pokemon geladen!");
+		offset += 20;
 		
 	} catch (error) {
 			console.error("Fehler beim Laden:", error);
-		}
-}
-
-function renderPokemonCard() {
-	const pokemonContainerRef = document.getElementById("pokemon-container");
-
-	pokemonContainerRef.innerHTML = `
-
-	`;
-}
-
-function init() {
-	console.log("App startet!");
-	loadInitialPokemon();
+	} finally {
+		spinner.classList.add("hidden");
+		loadMoreBtn.disabled = false;
+		loadMoreBtn.textContent = "Load More Pokemon";
+	}
 }

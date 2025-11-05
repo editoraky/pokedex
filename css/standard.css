@@ -1,4 +1,116 @@
-box {
-    box-sizing: ;
-    scroll-behavior: ;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden; /* dies möchten wir im Kurs nicht. Aber warum genau? */
+}
+
+body {
+    -webkit-font-smoothing: antialiased; /* diese beiden Optionen machen die Schrift auf iOS Geräten schöner */
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-display: swap; 
+  font-family: 'Bangers';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/bangers-v25-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/open-sans-v44-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../assets/fonts/open-sans-v44-latin-700.woff2') format('woff2');
+}
+
+:root {
+    /* Hintergrundfarben */
+    --bg-darkest: #0a0e12;
+    --bg-dark: #0f1419;
+    --bg-card: #1e2a38;
+    --bg-overlay: rgba(0, 0, 0, 0.8);
+
+    /* Text */
+    --text-primary: #ffffff;
+    --text-secondary: #b8c5d6;
+
+
+    /* UI Colors */
+    --accent: #3b82f6;
+    --success: #10b981;
+    --error: #ef4444;
+
+    /* Pokemon Types */
+    --type-normal: #A8A878;
+    --type-fire: #F08030;
+    --type-water: #6890F0;
+    --type-grass: #78C850;
+    --type-electric: #F8D030;
+    --type-ice: #98D8D8;
+    --type-fighting: #C03028;
+    --type-poison: #A040A0;
+    --type-ground: #E0C068;
+    --type-flying: #A890F0;
+    --type-psychic: #F85888;
+    --type-bug: #A8B820;
+    --type-rock: #B8A038;
+    --type-ghost: #705898;
+    --type-dragon: #7038F8;
+    --type-dark: #705848;
+    --type-steel: #B8B8D0;
+    --type-fairy: #EE99AC;
+}
+
+body {
+    font-family: "Open Sans", Arial, sans-serif;
+    background: var(--bg-darkest);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+h1, h2, h3 {
+    font-family: "Bangers", cursive;
+    letter-spacing: 1px;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    font-family: "Open Sans", sans-serif;
+    transition: all 0.3s ease;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.hidden {
+    display: none !important;
 }

@@ -19,8 +19,8 @@
 
         <div class="header-right">
             <div class="search-container">
-                <input type="text" id="search-input" class="search-input" placeholder="Search Pokemon..." minlength="3" aria-label="Search for Pokemon">
-                <button id="search-btn" class="search-btn" disabled aria-label="Search button">
+                <input type="text" id="search-input" class="search-input" placeholder="Search Pokemon...Type at least 3 characters" minlength="3" aria-label="Search for Pokemon" oninput="checkSearchInput()">
+                <button id="search-btn" class="search-btn" disabled aria-label="Search button" onclick="searchPokemon()">
                     🔍
                 </button>
             </div>
@@ -29,7 +29,8 @@
 
     <main class="main-content">
         <div id="pokemon-container" class="pokemon-container">
-
+            
+            
         </div>
 
         <div class="load-more-container">
@@ -37,6 +38,7 @@
                 id="load-more-btn"
                 class="load-more-btn"
                 aria-label="Load more Pokemon"
+                onclick="loadMorePokemon()"
             >
                 Load More Pokemon
             </button>
@@ -48,44 +50,22 @@
         <p>Loading Pokemon...</p>
     </div>
 
-
-    <div id="pokemon-overlay" class="overlay hidden">
-        <div class="overlay-background" onclick="closeOverlay()"></div>
-
-        <div class="pokemon-detail-card">
-            <button 
-                class="close-btn"
-                onclick="closeOverlay()"
-                aria-label="Close details"
-            >
-                x
-            </button>
-
-            <button
-                class="nav-btn nav-btn-left"
-                onclick="showPreviousPokemon()"
-                aria-label="Previous Pokemon"
-            >
-                ◀
-            </button>
-
-            <button
-                class="nav-btn nav-btn-right"
-                onclick="showNextPokemon()"
-                aria-label="Next Pokemon"
-            >
-                ▶  
-            </button>
-
-            <div id="pokemon-detail-content" class="pokemon-detail-content">
-
+    <dialog id="pokemon-dialog" class="pokemon-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+        <div class="dialog-content">
+            <button type="button" class="close-button" onclick="closeDialog()">&times;</button>
+            <button type="button" class="nav-button prev-button" onclick="navigatePokemon(-1)">❮</button>
+            <button type="button" class="nav-button next-button" onclick="navigatePokemon(+1)">❯</button>
+        
+            <div id="dialog-pokemon-content">
+                
             </div>
         </div>
-    </div>
+    </dialog>
 
+    
+    
     <script src="./js/api.js"></script>
     <script src="./js/templates.js"></script>
-    <script src="./js/render.js"></script>
     <script src="./js/script.js"></script>
 </body>
 </html>
