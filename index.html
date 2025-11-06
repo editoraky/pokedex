@@ -11,18 +11,22 @@
 </head>
 <body onload="init()">
     
-    <header class="header">
-        <div class="header-left">
-            <img src="./assets/images/pokemon-pikachu.png" alt="Pokemon Pikachu" class="logo">
-            <h1 class="title">Pokedex</h1>
-        </div>
+    <header>
+        <div class="content-limitation">
+            <div class="logo-search">
+                <a href="index.html">
+                    <div class="logo-pika">
+                        <img src="./assets/images/pokemon-pikachu.png" alt="Pokemon Pikachu" class="logo">
+                        <h1 class="title">Pokedex</h1>
+                    </div>
+                </a>
 
-        <div class="header-right">
-            <div class="search-container">
-                <input type="text" id="search-input" class="search-input" placeholder="Search Pokemon...Type at least 3 characters" minlength="3" aria-label="Search for Pokemon" oninput="checkSearchInput()">
-                <button id="search-btn" class="search-btn" disabled aria-label="Search button" onclick="searchPokemon()">
-                    🔍
-                </button>
+                <div class="search-container">
+                    <input type="text" id="search-input" class="search-input" placeholder="Search Pokemon...Type at least 3 characters" minlength="3" aria-label="Search for Pokemon" oninput="checkSearchInput()">
+                    <button id="search-btn" class="search-btn" disabled aria-label="Search button" onclick="searchPokemon()">
+                        🔍
+                    </button>
+                </div>
             </div>
         </div>
     </header>
@@ -46,22 +50,23 @@
     </main>
 
     <div id="loading-spinner" class="loading-spinner hidden">
-        <div class="spinner"></div>
+        <div class="spinner"><img src="./assets/icons/pokemon-favicon.png" alt=""></div>
         <p>Loading Pokemon...</p>
     </div>
 
-    <dialog id="pokemon-dialog" class="pokemon-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
-        <div class="dialog-content">
-            <button type="button" class="close-button" onclick="closeDialog()">&times;</button>
-            <button type="button" class="nav-button prev-button" onclick="navigatePokemon(-1)">❮</button>
-            <button type="button" class="nav-button next-button" onclick="navigatePokemon(+1)">❯</button>
-        
-            <div id="dialog-pokemon-content">
-                
+    
+        <dialog id="pokemon-dialog" class="pokemon-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+            <div class="dialog-content">
+                <button type="button" class="close-button" onclick="closeDialog()">&times;</button>
+                <button type="button" class="nav-button prev-button" onclick="navigatePokemon(-1)">❮</button>
+                <button type="button" class="nav-button next-button" onclick="navigatePokemon(+1)">❯</button>
+            
+                <div id="dialog-pokemon-content">
+                    
+                </div>
             </div>
-        </div>
-    </dialog>
-
+        </dialog>
+    
     
     
     <script src="./js/api.js"></script>

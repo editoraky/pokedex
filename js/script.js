@@ -4,7 +4,6 @@ let allPokemon = [];
 function init() {
 	loadPokemon();
 
-	// Dialog Setup
 	const dialog = document.getElementById("pokemon-dialog");
 
 	dialog.addEventListener("click", function (event) {
@@ -69,7 +68,6 @@ function searchPokemon() {
 			const html = getPokemonCardTemplate(name, image, types, i);
 			container.innerHTML += html;
 			foundCount++;
-
 		}
 	}
 	if (foundCount === 0) {
