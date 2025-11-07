@@ -41,4 +41,5 @@ async function loadPokemon() {
 		loadMoreBtn.disabled = false;
 		loadMoreBtn.textContent = "Load More Pokemon";
 	}
+	document.getElementById("load-more-btn").classList.remove("hidden");
 }

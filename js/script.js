@@ -47,6 +47,25 @@ function navigatePokemon(direction) {
     content.innerHTML = getPokemonDetailTemplate(pokemon);
 }
 
+function renderSearchResults(searchTerm, container) {
+    let foundCount = 0;
+
+    for (let i = 0; i < allPokemon.length; i++) {
+			const pokemon = allPokemon[i];
+			const name = pokemon.name;
+			const nameLower = name.toLowerCase();
+
+			if (nameLower.includes(searchTerm)) {
+				const image = pokemon.sprites.other["official-artwork"].front_default;
+				const types = pokemon.types;
+				const html = getPokemonCardTemplate(name, image, types, i);
+				container.innerHTML += html;
+				foundCount++;
+			}
+    }
+    return foundCount;
+}
+
 function searchPokemon() {
 	const input = document.getElementById("search-input");
 	const searchTerm = input.value.toLowerCase();
@@ -54,26 +73,14 @@ function searchPokemon() {
 	const container = document.getElementById("pokemon-container");
 	container.innerHTML = "";
 
-	let foundCount = 0;
-
-	for (let i = 0; i < allPokemon.length; i++) {
-		const pokemon = allPokemon[i];
-		const name = pokemon.name;
-		const nameLower = name.toLowerCase();
-
-		if (nameLower.includes(searchTerm)) {
-			const image = pokemon.sprites.other["official-artwork"].front_default;
-			const types = pokemon.types;
-
-			const html = getPokemonCardTemplate(name, image, types, i);
-			container.innerHTML += html;
-			foundCount++;
-		}
-	}
-	if (foundCount === 0) {
+    const foundCount = renderSearchResults(searchTerm, container);
+	
+    if (foundCount === 0) {
 		container.innerHTML =
 			'<p class="no-results">No Pokemon found! Try another name.</p>';
-	}
+    }
+    document.getElementById("load-more-btn").classList.add("hidden");
+    document.getElementById("reset-button").classList.remove("hidden");
 }
 
 function showAllPokemon() {
@@ -88,6 +95,8 @@ function showAllPokemon() {
         const html = getPokemonCardTemplate(name, image, types, i);
         container.innerHTML += html;
     }
+    document.getElementById("load-more-btn").classList.remove("hidden");
+    document.getElementById("reset-button").classList.add("hidden");
 }
 
 function checkSearchInput() {

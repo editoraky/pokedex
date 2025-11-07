@@ -40,11 +40,18 @@
         <div class="load-more-container">
             <button
                 id="load-more-btn"
-                class="load-more-btn"
+                class="load-more-btn hidden"
                 aria-label="Load more Pokemon"
                 onclick="loadMorePokemon()"
             >
                 Load More Pokemon
+            </button>
+            <button
+                id="reset-button"
+                class="reset-button hidden" onclick="showAllPokemon()"
+                aria-label="Reset to Homepage" 
+            >
+                Reset Search
             </button>
         </div>
     </main>
