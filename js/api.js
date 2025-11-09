@@ -27,7 +27,12 @@ async function loadPokemon() {
 				const types = details.types;
 
 				const currentIndex = allPokemon.length - 1;
-				const html = getPokemonCardTemplate(name, image, types, currentIndex);
+
+				const nameUpper = name.toUpperCase();
+				const typesHTML = getTypesHTML(types);
+				const primaryType = types[0].type.name;
+
+				const html = getPokemonCardTemplate(currentIndex, nameUpper, image, typesHTML, primaryType);
 				
 				const container = document.getElementById("pokemon-container");
 				container.innerHTML += html;

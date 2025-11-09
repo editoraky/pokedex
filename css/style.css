@@ -311,12 +311,12 @@ a {
     overflow-y: auto;
 }
 
-.close-button {
+.close-button,
+.nav-button {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.2);
+    color: whitesmoke;
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -326,35 +326,27 @@ a {
     justify-content: center;
 }
 
-.close-button:hover {
-    background: rgba(255, 255, 255, 0.3);
+.close-button:hover,
+.nav-button:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.close-button {
+    top: 20px;
+    right: 20px;
 }
 
 .nav-button {
-    position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    font-size: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.nav-button:hover {
-    background: rgba(255, 255, 255, 0.3);
 }
 
 .prev-button {
-    left: 10px;
+    left: 20px;
 }
 
 .next-button {
-    right: 10px;
+    right: 20px;
 }
 
 .pokemon-detail {
@@ -451,19 +443,24 @@ a {
 
 .loading-spinner {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 8px;
+    background-color: rgba(0, 0, 0, 0.8);
+    font-size: 24px;
+    font-family: "Bangers", sans-serif;
+    
 }
 
 .spinner {
-    width: 60px;
-    height: 60px;
+    width: 120px;
+    height: 120px;
     border: 5px solid var(--bg-card);
     border-top: 5px solid var(--accent);
     border-radius: 50%;
@@ -484,6 +481,43 @@ a {
         width: 100%;
     }
 
+    .close-button,
+    .nav-button {
+        position: fixed;
+        background: rgba(0, 0, 0, 0.4);
+        color: whitesmoke;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+    }
+
+    .close-button:hover,
+    .nav-button:hover {
+        background: rgba(0, 0, 0, 0.6);
+    }
+
+    .close-button {
+        top: 100px;
+        right: 80px;
+    }
+
+    .nav-button {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .prev-button {
+        left: 70px;
+    }
+
+    .next-button {
+        right: 70px;
+    }
 }
 
 @media (max-width: 650px) {
@@ -491,5 +525,44 @@ a {
         display: flex;
         align-items: center;
         flex-direction: column;
+    }
+
+     .close-button {
+        top: 100px;
+        right: 40px;
+    }
+
+    .nav-button {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .prev-button {
+        left: 30px;
+    }
+
+    .next-button {
+        right: 30px;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .close-button {
+        top: 80px;
+        right: 30px;
+    }
+
+    .nav-button {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .prev-button {
+        left: 20px;
+    }
+
+    .next-button {
+        right: 20px;
     }
 }

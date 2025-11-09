@@ -13,15 +13,59 @@ function init() {
 	});
 }
 
+function getTypesHTML(types) {
+	let typesHTML = "";
+	for (let i = 0; i < types.length; i++) {
+		const typeName = types[i].type.name;
+		typesHTML += `<span class="type-badge type-${typeName}">${typeName}</span>`;
+	}
+	return typesHTML;
+}
+
+function getStatsHTML(pokemon) {
+	const hp = pokemon.stats[0].base_stat;
+	const attack = pokemon.stats[1].base_stat;
+	const defense = pokemon.stats[2].base_stat;
+	const speed = pokemon.stats[5].base_stat;
+
+	return `
+        <div class="pokemon-stats">
+            <div class="stat-item">
+                <span class="stat-label">HP:</span>
+                <span class="stat-value">${hp}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Attack:</span>
+                <span class="stat-value">${attack}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Defense:</span>
+                <span class="stat-value">${defense}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Speed:</span>
+                <span class="stat-value">${speed}</span>
+            </div>
+    `;
+}
+
 function openDialog(index) {
     currentPokemonIndex = index;
     const pokemon = allPokemon[index];
+    const dialogContent = document.getElementById("dialog-pokemon-content");
+    
+    const name = pokemon.name.toUpperCase();
+    const image = pokemon.sprites.other["official-artwork"].front_default;
+    const typesHTML = getTypesHTML(pokemon.types);
+    const statsHTML = getStatsHTML(pokemon);
+    const primaryType = pokemon.types[0].type.name;
+
+    dialogContent.innerHTML = getPokemonDetailTemplate(name, image, typesHTML, statsHTML, primaryType);
+    updateNavButtons(index);
 
     const dialog = document.getElementById("pokemon-dialog");
-    const content = document.getElementById("dialog-pokemon-content");
-
-    content.innerHTML = getPokemonDetailTemplate(pokemon);
     dialog.showModal();
+
     document.body.classList.add("no-scroll");
 }
 
@@ -30,21 +74,23 @@ function closeDialog() {
     dialog.close();
 
     document.body.classList.remove("no-scroll");
-}
+ }
 
 function navigatePokemon(direction) {
-    currentPokemonIndex = currentPokemonIndex + direction;
+    const newIndex = currentPokemonIndex + direction;
 
-    if (currentPokemonIndex < 0) {
-        currentPokemonIndex = 0;
+    if (newIndex >= 0 && newIndex < allPokemon.length) {
+        openDialog(newIndex);
     }
-    if (currentPokemonIndex >= allPokemon.length) {
-        currentPokemonIndex = allPokemon.length - 1;
-    }
+}
 
-    const pokemon = allPokemon[currentPokemonIndex];
-    const content = document.getElementById("dialog-pokemon-content");
-    content.innerHTML = getPokemonDetailTemplate(pokemon);
+function updateNavButtons(index) {
+    const prevButton = document.getElementById("prev-button");
+    const nextButton = document.getElementById("next-button");
+    const totalPokemon = allPokemon.length;
+
+    prevButton.disabled = (index === 0);
+    nextButton.disabled = (index === totalPokemon - 1);
 }
 
 function renderSearchResults(searchTerm, container) {
@@ -57,8 +103,12 @@ function renderSearchResults(searchTerm, container) {
 
 			if (nameLower.includes(searchTerm)) {
 				const image = pokemon.sprites.other["official-artwork"].front_default;
-				const types = pokemon.types;
-				const html = getPokemonCardTemplate(name, image, types, i);
+                const typesHTML = getTypesHTML(pokemon.types);
+                const nameUpper = pokemon.name.toUpperCase();
+                const primaryType = pokemon.types[0].type.name;
+                const index = i;
+				
+                const html = getPokemonCardTemplate(index, nameUpper, image, typesHTML, primaryType);
 				container.innerHTML += html;
 				foundCount++;
 			}
@@ -81,6 +131,7 @@ function searchPokemon() {
     }
     document.getElementById("load-more-btn").classList.add("hidden");
     document.getElementById("reset-button").classList.remove("hidden");
+    input.value = "";
 }
 
 function showAllPokemon() {
@@ -89,10 +140,12 @@ function showAllPokemon() {
 
     for (let i = 0; i < allPokemon.length; i++) {
         const pokemon = allPokemon[i];
-        const name = pokemon.name;
+        const nameUpper = pokemon.name.toUpperCase();
         const image = pokemon.sprites.other["official-artwork"].front_default;
-        const types = pokemon.types;
-        const html = getPokemonCardTemplate(name, image, types, i);
+        const typesHTML = getTypesHTML(pokemon.types);
+        const primaryType = pokemon.types[0].type.name;
+        const index = i;
+        const html = getPokemonCardTemplate(index, nameUpper, image, typesHTML, primaryType);
         container.innerHTML += html;
     }
     document.getElementById("load-more-btn").classList.remove("hidden");

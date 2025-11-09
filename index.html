@@ -63,10 +63,11 @@
 
     
         <dialog id="pokemon-dialog" class="pokemon-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+                    <button type="button" class="close-button" onclick="closeDialog()">&times;</button>
+                    <button type="button" class="nav-button prev-button" id="prev-button" onclick="navigatePokemon(-1)">❮</button>
+                    <button type="button" class="nav-button next-button" id="next-button" onclick="navigatePokemon(+1)">❯</button>
             <div class="dialog-content">
-                <button type="button" class="close-button" onclick="closeDialog()">&times;</button>
-                <button type="button" class="nav-button prev-button" onclick="navigatePokemon(-1)">❮</button>
-                <button type="button" class="nav-button next-button" onclick="navigatePokemon(+1)">❯</button>
+                     
             
                 <div id="dialog-pokemon-content">
                     
